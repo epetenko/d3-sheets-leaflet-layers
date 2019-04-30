@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Marijuana support by town</title>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<meta property="og:title" content="Weed map by town">
+<meta property="og:description" content="Track the latest on what towns support marijuana in NJ">
+<meta property="og:image" content="https://s3.amazonaws.com/nj-data/Weed_map_by_town/preview_image.png">
+<meta property="og:url" content="https://s3.amazonaws.com/nj-data/Weed_map_by_town/Weed_map.html">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
+ -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.min.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136346499-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-136346499-1');
+</script>
+
+</head>
+<body>
+
+<div id="njam-container">
+<!--   <div class='liltopper'>Exclusive for insiders</div>
+  <img src='favicon-cannabis.png' id='icon'>
+  <div class='head'>Town support tracker</div>
+ -->  <div class='subhead'>Town support as of <div id='date'></div></div>
+  <div id="legend">
+      <div id='legend-intro'> Filter to: </div>
+    <button class='key' id='Yes-button'><div class='Yes-key'></div>Yes</button>
+    <button class='key' id='No-button'><div class='No-key'></div>No</button>
+    <button class='key' id='Active-button'><div class='Active-key'></div>Active</button>
+        <button class='key' id='Reset-button'>Show all</button>
+    <div id='legend-intro'>Towns outlined in bold have current medical dispensaries.</div>
+
+  </div>
+ <div id="mapcanvas">
+ <div class="waiting"><img src="img/hourglass.svg"></div>
+
+  <div class="leaflet-bottom leaflet-left">
+
+  
+
+  </div>
+ 
+  </div>
+
+  <h1>OR...</h1>
+<p>Use our dropdown menu to bring up your town's results below</p>
+ <span id="county1">
+  <select class="chosen-select town1" data-placeholder="Pick a category..." style="width:90%;height: 30px" tabindex="2">
+      <option value='' disabled selected>Select a category:</option>
+        <option value="YES">Yes
+        </option>
+        <option value="NO">No
+        </option>
+        <option value="ACTIVE">Active
+        </option>
+        <option value='Show_all'>Show all</option>
+        <option value='Collapse'>Collapse this list</option>
+      </select>
+    </span> 
+
+  <div class="grid"></div>
+
+  <div class="credit">
+        <p><b>Design/Development:</b> Erin Petenko and Carla Astudillo</p>
+      </div>
+  <div>
+</div>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<script src="https://d3js.org/topojson.v1.min.js" type="text/javascript"></script>
+<script src="js/tabletop.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js" type="text/javascript"></script>
+
+<script src="js/leaflet.geocsv.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.jquery.min.js" type="text/javascript">
+    </script> 
+<script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js">
+    </script> 
+<!--    <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
+ -->  <script src="js/Weed_map.js"></script>
+
+<script src="https://pym.nprapps.org/pym.v1.min.js" type="text/javascript"></script>
+
+
+</body>
+</html>

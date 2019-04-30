@@ -1,0 +1,321 @@
+#njam-container {
+  font-size: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  fill: #333;
+  margin: 0;
+  max-width: 620px;
+}
+
+#njam-container div.btn-group.bootstrap-select {
+  margin-bottom: 30px;
+  width: 90%;
+}
+
+#njam-container h1 {
+  font-size: 22px;
+}
+
+.element-item {
+    position: relative;
+    float: left;
+    width: 93%;
+    height: auto;
+    margin: 25px 5px 5px 5px;
+    padding: 10px 0 10px 10px;
+    background: #F2F2F2;
+    background-color: rgba(242, 242, 242, 0.5);
+    border: 1px dashed black;
+    color: #262524;
+}
+.element-item > * {
+    padding: 0;
+}
+
+.element-item h2 {
+  font-size: 22px;
+}
+
+.muni_elex {
+  color: #333;
+}
+
+.muni_grid {
+ width: 100%;
+ text-align: left;
+}
+
+.muni_grid td {
+   font-size: 13px;
+   max-width: 60px;
+}
+
+
+.grid {
+
+  min-height: 300px;
+
+}
+
+ 
+
+td.name.republican.won {
+  color:#67000d;
+  font-size: 15px;
+}
+
+td.name.democrat.won {
+  color: #08306b;
+  font-size: 15px;
+}
+
+div#winner {
+    width:90px;
+    display:inline-block;
+    font-size: 22px;
+    text-align: left;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+div#margin {
+    width:47%;
+    display:inline-block;
+    font-size: 17px;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 10px 0;
+}
+
+
+div#margin span {
+
+  font-size: 25px;
+  font-weight: bold;
+
+}
+
+.muni_grid .name {
+  text-align:left;
+}
+
+.waiting img {
+  margin: 5% 20%;
+  width: 20%;
+}
+
+.njcounties {
+  border: 2px solid #333;
+}
+
+span#county1, span#town1 {
+  margin-top: 10px;
+}
+
+h2 {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  border-bottom: 1px dashed #333;
+}
+
+h2.title {
+  font-size: 23px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  border-bottom: 1px dashed #333;
+}
+
+td {
+  padding: 3px;
+  font-size: 12px;
+}
+
+.sen_rep {
+  color: #67000d;
+}
+
+.sen_dem {
+  color: #08306b;
+}
+
+.tie {
+  color: #333;
+}
+
+.name {
+  font-weight: bold;
+}
+
+#njam-container h3 {
+  font-size: 12px;
+  margin: 0;
+}
+
+#njam-container h4 {
+  font-size: 14px;
+}
+
+#njam-container p {
+  color: #787878;
+  font-size: 15px;
+  line-height: 14px;
+}
+
+#njam-container .line {
+  fill: none;
+  color: #9C4811;
+  stroke-width: 0.5px;
+}
+
+#map {
+  max-width: 620px;
+}
+
+.nj {
+  color: #FFF;
+}
+
+.njmunis {
+  color: #444;
+  stroke-opacity: 0.6;
+  stroke-opacity: 0.6;
+  fill-opacity: 0.88;
+  fill: #FFF;
+}
+
+#njam-container .area {
+  opacity: 0.7;
+}
+
+.number {
+  font-weight: bold;
+  color: #993404;
+  font-size: 15px;
+}
+
+#infobox p {
+   text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+#infobox img {
+  width: 60px;
+}
+
+
+.tooltip {
+  position: absolute;
+  padding: 8px;
+  pointer-events: none;
+  background: rgba(255, 255, 255, .8);
+  border: 1px #999 solid;
+}
+
+.republicanLegend,
+.democratLegend {
+  color: #333;
+  font-weight: bold;
+}
+
+.leaflet-container {
+  background-color: #FFF !important;
+}
+
+#legend {
+  width: 100%;
+  background: rgb(255, 255, 255);
+  /* Fall-back for browsers that don't support rgba */
+  background: rgba(255, 255, 255, .8)
+}
+
+.leaflet-bottom {
+  height: 80px;
+  width: 300px;
+  bottom: 10px !important;
+}
+
+
+
+@media (max-width: 450px) {
+  .leaflet-bottom {
+    height: 100px;
+    width: 100%;
+  }
+
+  #mapcanvas {
+  height: 350px!important;
+  width: 85%;
+  cursor: pointer;
+}
+
+div#winner {
+    font-size: 16px;
+}
+
+div#margin {
+    font-size: 14px;
+   }
+
+   div#margin span {
+
+  font-size: 20px;
+
+}
+
+h2 {
+  font-size: 10px;
+}
+
+td{
+ font-size: 10px;
+}
+
+
+}
+
+li.key {
+  border-top-width: 15px;
+  border-top-style: solid;
+  font-size: .75em;
+  width: 10%;
+  padding-left: 0;
+  padding-right: 0;
+  float: left;
+  list-style-type: none;
+}
+
+
+html,
+body {
+  margin: 0;
+}
+
+#mapcanvas {
+  height: 600px;
+  width: 100%;
+  cursor: pointer;
+}
+
+#credit {
+  float: right;
+}
+
+#credit img {
+  width: 70px;
+  float: right;
+  padding-bottom: 10px;
+}
+
+#credit p {
+  clear: both;
+  text-align: right;
+}
+
+#njam-container {
+  font-family: 'Source Sans Pro', sans-serif;
+}
