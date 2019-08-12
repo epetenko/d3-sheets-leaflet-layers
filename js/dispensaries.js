@@ -1,3 +1,4 @@
+// Most of the action here is described in Weed_map.js. Skip to ~373 to see where points are added, etc.
 var geoJsonObject;
 
 var pymChild = null;
@@ -369,11 +370,13 @@ $('#date').html(today);
 
     // pointsGroup.addTo(map);
 
+// This parses the lat/lang of the data for Leaflet to read
 data.forEach(function(d) {
     d.LatLng = new L.LatLng(parseFloat(d.lat),
                             parseFloat(d.lng))
 })
 
+// Creating the points 
 var points = g.selectAll("circle")
         .data(data)
         .enter().append("circle")
@@ -390,6 +393,7 @@ var points = g.selectAll("circle")
         .attr("r", 5)
         .on('click', mousemove)
 
+// Moves the points to correspond to Leaflet's latlang spot
 map.on("moveend", update);
 update();
 

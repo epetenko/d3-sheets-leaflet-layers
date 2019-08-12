@@ -3,24 +3,25 @@ var geoJsonObject;
 var pymChild = null;
 
 $(document).ready(function() {
+
+// Getting today's date if you want to say "As of..." 
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth() + 1; //January is 0!
 var yyyy = today.getFullYear();
-
 if (dd < 10) {
   dd = '0' + dd;
 }
-
 if (mm < 10) {
   mm = '0' + mm;
 }
-
 today = mm + '/' + dd + '/' + yyyy;
 $('#date').html(today);
-    // Dropdown Function Pt. 1
-    var usedNames = [];
 
+
+// Dropdown Function Pt. 1
+// setting variables for the dropdown
+    var usedNames = [];
     var config = {
         '.chosen-select': {},
         '.chosen-select-deselect': {
@@ -39,19 +40,15 @@ $('#date').html(today);
     for (var selector in config) {
         $(selector).chosen(config[selector]);
     }
-
     var dropdown_county1 = $('select.chosen-select.county1'),
         dropdown_town1 = $('select.chosen-select.town1'),
         grid = $('.grid')
 
-
+// Some variables to set the width/height of the map
     var mobile_threshold = 450;
     var winwidth = parseInt(d3.select('#mapcanvas').style('width'))
     var winheight = parseInt(d3.select('#mapcanvas').style('height'))
-
     var isMobile = isMobile(winwidth);
-
-
     function isMobile(w) {
         if (w < mobile_threshold) {
             return true
@@ -60,6 +57,7 @@ $('#date').html(today);
         }
     }
 
+// Leaflet Pt. 1 -- creating the map, pulling the Carto tilelayer and labels, and setting the viewpoint
     map = new L.Map('mapcanvas', {
         attributionControl: false,
         // minZoom: isMobile? 6.5:5.5,
@@ -80,9 +78,12 @@ $('#date').html(today);
         // isMobile? 7.5:8.5
     );
 
+// This is the ID you could use if you have a latlong spreadsheet
     var points_id = '1mAkQ0pXLmhNSYpgDsO-ruypLhAs3Hm4cZ6T-2wDQmII'
+// This is the ID you use if you have a town-by-town spreadsheet
+    var spreadsheet_id = "1ii8TBGiR6PxugVt7kzMt8EZvqOgctzsBV6-aMRs5a9c"
 
-
+// D3 append SVG to start
     var svg = d3.select(map.getPanes().overlayPane).append("svg"),
         g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
@@ -93,8 +94,7 @@ $('#date').html(today);
         .style("top", "0px")
         .style("left", winwidth - 180 + "px")
 
-
-    var spreadsheet_id = "1ii8TBGiR6PxugVt7kzMt8EZvqOgctzsBV6-aMRs5a9c"
+// queue for the town-by-town data
     queue()
         .defer(d3.json, "js/nj_munis_2.json")
         .defer(d3.csv, "https://docs.google.com/spreadsheets/d/" + spreadsheet_id + "/export?format=csv")
@@ -105,6 +105,7 @@ $('#date').html(today);
 
     function ready(error, us, data) {
 
+// Need to read in the variables and make them into numbers in some cases
         var category = {};
         var notes = {};
         var hyperlink = {};
@@ -129,22 +130,14 @@ $('#date').html(today);
             just_town[d.census2010] = d.just_town;
             dispensary[d.census2010] = d.dispensary;
 
-
-            // if (usedNames.indexOf(d.county) == -1) {
-            //            var option = $('<option value="' + d.county + '">' + d.county + '</option>');
-
-            //            dropdown_county1.append(option);
-            //            usedNames.push(d.county);
-            //        };
-
-
         });
+
 
         // var max = d3.max(data, function(d) { return d.sen_dem; } );
         // var min = d3.min(data, function(d) { return d.sen_dem; } );
 
 
-
+// some number formatting functions
         function isNegative(x) {
             if (x >= 0) {
                 return "+"
@@ -175,7 +168,7 @@ $('#date').html(today);
 
 
 
-        // Dropdown Function Pt. 2
+        // Dropdown Function Pt. 2 - how much of this you want to use depends on whether you want a county/town level that Carla originally had.
 
         // dropdown_county1.trigger("chosen:updated");
         // dropdown_county1.chosen().on('chosen:showing_dropdown', function() {
@@ -223,7 +216,9 @@ $('#date').html(today);
         //     })
         // }
 
+        //This specifically creates the cards that pop up for each area:
         function populate_cards(btn_value, thegrid, thedropdown) {
+            // The option to reveal all cards -- will reveal unless the category is specifically set to N/A
             if (btn_value == 'Show_all') {
                 data.forEach(function(d) {
                     if (d.category != 'N/A') {
@@ -267,61 +262,12 @@ $('#date').html(today);
         var legend_width = 250,
             divisions = 8;
 
-
-        // var svg2 = d3.select("#legend").append("svg")
-        // var legend = svg2.append("g").attr("transform", "translate(5,25)")
-
-        // var EqualColor = "#f7f7f7",
-        //       TrumpColorMax = "#a50f15",
-        //       ClintonColorMax = "#08519c";
-        //       var PercentMax = 55;
-        //       var PercentMin = -55;
-
-
-        //  var TrumpColor = d3.scale.linear()
-        //         .range([EqualColor, TrumpColorMax])
-        //         .domain([0,PercentMax])
-        //         .interpolate(d3.interpolateLab);
-
-        // var ClintonColor = d3.scale.linear()
-        //     .range([EqualColor, ClintonColorMax])
-        //     .domain([0,PercentMax])
-        //     .interpolate(d3.interpolateLab);
-
-        //         var fakeData = [];
-        //     var rectWidth = Math.floor(legend_width / divisions);
-        //     for (var i=0; i < legend_width; i+= rectWidth ) {
-        //         fakeData.push(i);
-        //     }
-
-
-        //     var ClintonScaleLegend = d3.scale.linear()
-        //           .domain([0, fakeData.length-1])
-        //           .interpolate(d3.interpolateLab)
-        //           .range([EqualColor, ClintonColorMax]);
-        //     var ClintonLegend = legend.append("g").attr("class", "ClintonLegend");
-
-        //     ClintonLegend.selectAll("rect")
-        //         .data(fakeData)
-        //         .enter()
-        //         .append("rect")
-        //             .attr("x", function(d) { return d; })
-        //             .attr("y", 10)
-        //             .attr("height", 10)
-        //             .attr("width", rectWidth)
-        //             .attr("fill", function(d, i) { return ClintonScaleLegend(i)});
-
-        //     legend.append("text").text("DIFFERENCE 2012 vs. 2016").attr("transform", "translate("+legend_width/3+",60)").style('font-weight', 'bold');
-        //     legend.append("text").text("CLINTON/BUONO").attr("transform", "translate("+(0)+",0)");
-        //     legend.append("text").text(function(){return "+0%";}).attr("transform","translate(0,35)");
-        //     legend.append("text").text(function(){return "+" + (PercentMax*1).toFixed(0) + "%";}).attr("transform","translate("+(legend_width)+",35)");
-
-
+// This is an optional variable to set the color for a quantitative variable. To use this set fill to DemColor(d.whatever);
         var DemColor = d3.scale.quantize()
             .domain([-20, 20])
             .range(["#762a83", "#af8dc3", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#7fbf7b", "#1b7837"]);
 
-
+// optional - create a legend with those colors - 
         // var legend = d3.select('#legend')
         //     .append('ul')
         //     .attr('class', 'list-inline');
@@ -342,7 +288,7 @@ $('#date').html(today);
 
 
         $(".waiting").remove();
-
+// All this adds in the shapefiles for the town-by-town data. Can be re-jiggered to do county instead. 
         collection = topojson.feature(us, us.objects.nj_munis_2)
 
         var transform = d3.geo.transform({
@@ -366,18 +312,9 @@ $('#date').html(today);
             .on("click", mousemove)
         // .on("mouseout", function(d) { 
 
-        // feature.style({
-        //          'stroke-opacity': 0.6,
-        //          'stroke': '#444',
-        //          "stroke-width": 0.5
-        //      });  
-        //   div.style("opacity", 0)
-        // });
-
-
+// Leaflet pt. 2 - This ensures both Leaflet and D3 update when the map is moved.
         map.on("moveend", reset);
         reset();
-
         function reset() {
             var bounds = path.bounds(collection),
                 topLeft = bounds[0],
@@ -398,11 +335,8 @@ $('#date').html(today);
         div.html("<h2>Click for more info</h2>")
 
 
-
+// A test for qualitative color categories -- this is where you would put the DemColor() if you have quantitative categories.
         feature.style("fill", function(d) {
-
-
-
                 if (category[d.id] == 'YES') {
                     return '#55951b'
                 } else if (category[d.id] == 'NO') {
@@ -414,7 +348,6 @@ $('#date').html(today);
                 }
 
                 // return DemColor(sen_dem[d.id] - sen_dem_2012[d.id])
-
 
             })
             .style('stroke', function (d){
@@ -432,15 +365,14 @@ $('#date').html(today);
                     return 0.4
                 }
             })
-        function mousemove(d) {
 
+// Function to handle mouseover and tooltips
+        function mousemove(d) {
             // feature.style({
             //     'stroke-opacity': 0.6,
             //     'stroke': '#444',
             //     "stroke-width": 0.5
             // })
-
-
             d3.select(this.parentNode.appendChild(this))
                 // .style({
                 //     'stroke-opacity': 1,
@@ -450,21 +382,18 @@ $('#date').html(today);
             div.style("opacity", .95)
                 // .attr('style', 'pointer-events:visiblePainted;')
                 .style('z-index', 1000)
+// The tooltip text
             div.html("<h2 class='town_name'>" + just_town[d.id] + "</h2><h3 class='county'>" + county[d.id] + "</h3><div class='category " + category[d.id] + "''>" + category[d.id] + "</div><div id='infobox'><table class='muni_elex'><td class='notes'>" + notes[d.id] + "</td></tr><td class='name clinton'><a href='" + hyperlink[d.id] + "' target='_blank'>" + test_hyperlink(hyperlink[d.id]) + "</a></td><td></table>")
             // div
             //    .style("left", (mobileoffset(d3.event.pageX) + 10) + "px")
             //    .style("z-index", 1400)
             //    .style("top", (d3.event.pageY) + "px");
 
-
+// Functions to test the mobile width to see what side of your finger the tooltip appears on
             function mobileoffset(d) {
-
                 var xoff = winwidth - d;
                 var xper = xoff / winwidth;
-
-
                 if (winwidth < 400 && xper < 0.55) {
-
                     return d - winwidth / 2;
                 } else {
                     return d;
@@ -473,28 +402,18 @@ $('#date').html(today);
             }
         }
 
-
-
-
         function mobileoffset(d) {
-
             var xoff = winwidth - d;
-
             var xper2 = xoff / winwidth;
-
-
             var xper = 1 - xper2
-
             if (xper > 0.50) {
-
-
                 return -175;
             } else if (xper <= 0.50) {
                 return -10;
             }
-
         }
 
+// Filter buttons to only show positive towns
         d3.select("#Yes-button").on("click", function() {
             console.log('this')
             feature
@@ -507,7 +426,6 @@ $('#date').html(today);
                     }
                 })
         });
-
         d3.select("#No-button").on("click", function() {
             feature
                 .transition()
