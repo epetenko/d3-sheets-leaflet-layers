@@ -78,8 +78,9 @@ $('#date').html(today);
         // isMobile? 7.5:8.5
     );
 
+//CHANGE THIS NO. 1:
 // This is the ID you could use if you have a latlong spreadsheet
-    var points_id = '1mAkQ0pXLmhNSYpgDsO-ruypLhAs3Hm4cZ6T-2wDQmII'
+    // var points_id = '1mAkQ0pXLmhNSYpgDsO-ruypLhAs3Hm4cZ6T-2wDQmII'
 // This is the ID you use if you have a town-by-town spreadsheet
     var spreadsheet_id = "1ii8TBGiR6PxugVt7kzMt8EZvqOgctzsBV6-aMRs5a9c"
 
@@ -104,7 +105,7 @@ $('#date').html(today);
 
 
     function ready(error, us, data) {
-
+// CHANGE THIS NO. 2 -- change these to match your columns/column names
 // Need to read in the variables and make them into numbers in some cases
         var category = {};
         var notes = {};
@@ -222,6 +223,7 @@ $('#date').html(today);
             if (btn_value == 'Show_all') {
                 data.forEach(function(d) {
                     if (d.category != 'N/A') {
+                        // CHANGE THIS NO. 3: Change these to the columns you would like to display
                         var gridsquares = '<div class="element-item">'
                         gridsquares += "<h2 class='town_name'>" + d.just_town + "</h2><h3 class='county'>" + d.county + "</h3><div class='category " + d.category + "''>" + d.category + "</div><div id='infobox'><table class='muni_elex'><td class='notes'>" + d.notes + "</td></tr><td class='name clinton'><a href='" + d.hyperlink + "' target='_blank'>Read more</a></td><td></table>"
                         thegrid.append(gridsquares)
@@ -242,6 +244,7 @@ $('#date').html(today);
                     div.style("opacity", 0)
                     //Goes through every row and sees if the btn_value matches either the county or the town. If it matches the town, it also checks to see if the county dropdown option matches the county. This is for towns with the same names in different counties.
                     if ((btn_value == d.category.toUpperCase())) {
+                        // CHANGE THIS NO. 4: See above
                         //Initializes the variable where all of the html will be appended
                         var gridsquares = '<div class="element-item">'
                         gridsquares += "<h2 class='town_name'>" + d.just_town + "</h2><h3 class='county'>" + d.county + "</h3><div class='category " + d.category + "''>" + d.category + "</div><div id='infobox'><table class='muni_elex'><td class='notes'>" + d.notes + "</td></tr><td class='name clinton'><a href='" + d.hyperlink + "' target='_blank'>" + test_hyperlink(d.hyperlink) + " </a></td><td></table>"
@@ -262,6 +265,7 @@ $('#date').html(today);
         var legend_width = 250,
             divisions = 8;
 
+// CHANGE THIS NO. 5:
 // This is an optional variable to set the color for a quantitative variable. To use this set fill to DemColor(d.whatever);
         var DemColor = d3.scale.quantize()
             .domain([-20, 20])
@@ -334,7 +338,7 @@ $('#date').html(today);
 
         div.html("<h2>Click for more info</h2>")
 
-
+// CHANGE THIS NO. 6:
 // A test for qualitative color categories -- this is where you would put the DemColor() if you have quantitative categories.
         feature.style("fill", function(d) {
                 if (category[d.id] == 'YES') {
@@ -382,6 +386,7 @@ $('#date').html(today);
             div.style("opacity", .95)
                 // .attr('style', 'pointer-events:visiblePainted;')
                 .style('z-index', 1000)
+// CHANGE THIS NO. 7:
 // The tooltip text
             div.html("<h2 class='town_name'>" + just_town[d.id] + "</h2><h3 class='county'>" + county[d.id] + "</h3><div class='category " + category[d.id] + "''>" + category[d.id] + "</div><div id='infobox'><table class='muni_elex'><td class='notes'>" + notes[d.id] + "</td></tr><td class='name clinton'><a href='" + hyperlink[d.id] + "' target='_blank'>" + test_hyperlink(hyperlink[d.id]) + "</a></td><td></table>")
             // div
@@ -413,6 +418,7 @@ $('#date').html(today);
             }
         }
 
+// CHANGE THIS NO. 8
 // Filter buttons to only show positive towns
         d3.select("#Yes-button").on("click", function() {
             console.log('this')
