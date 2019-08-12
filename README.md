@@ -11,5 +11,8 @@ Basic to-dos for these maps:
 - For shaded map, you will need a csv with the Census county subdivision (town) FIPS code already worked in. 
 - For point map, you will need a csv with lat and long in separate columns.
 - The main things you'll need to change are the variables, the color range, the dropdown results and the tooltips. You may want to change or comment out the button options as well.
+- Your shapefile/TopoJSON for municipal level shaded maps is already in here. You're connecting the results on the ID field.
+- This only works with D3v3 due to changes to the Leaflet mess.
+
 
 
