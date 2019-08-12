@@ -5,3 +5,6 @@ Just some code to add a Leaflet tile layer to bind to a D3 map, roughly based on
 
 Two options here:
 - Weed_map.js: Shaded (choropleth) map with options to color by a number or by a category. See example spreadsheet [here](https://docs.google.com/spreadsheets/d/1wLGxm54vkX2SZ27mIyk77AIMZQQ4QDpsS6E-UwvM2zw/edit?usp=sharing). 
+- dispensaries.js: A point-level map based on lat/long. See example spreadsheet [here](https://docs.google.com/spreadsheets/d/1t0wiDRMaqLwCdSWAKMbUTTALJfrS5xHivxrC8gC70lI/edit?usp=sharing). 
+
+
